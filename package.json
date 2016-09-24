@@ -1,0 +1,21 @@
+{
+  "name": "framework",
+  "version": "1.0.0",
+  "description": "Node JS MVC Framework ",
+  "main": "index.js",
+  "scripts": {
+    "test": "test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/izbib/framework.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "MVC",
+    "Framework"
+  ],
+  "author": "Ihab Zbib",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/izbib/framework#readme"
+}

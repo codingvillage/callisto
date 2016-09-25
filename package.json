@@ -1,5 +1,5 @@
 {
-  "name": "Chitta",
+  "name": "callisto",
   "version": "0.0.1",
   "description": "Fast and lean Node JS MVC Framework for single page applications. Uses websockets",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:codingvillave/chitta.git"
+    "url": "git@github.com:codingvillave/callisto.git"
   },
   "keywords": [
     "NodeJS",
@@ -17,11 +17,17 @@
   ],
   "author": "Ihab Zbib",
   "license": "MIT",
-  "homepage": "github.com/codingvillage/chitta",
+  "homepage": "github.com/codingvillage/callisto",
   "dependencies": {
     "sqlite3": "^3.1.1",
     "ws": "^1.1.1",
-    "jquery": "^3.1.1",
-    "jquery-ui": "^1.12.1"
+    "jquery": "^3.1.1"
+  },
+  "include": {
+    "js": [
+      "node_modules/jquery/dist/jquery.js",
+      "www/js/dom.js",
+      "www/js/util.js"
+    ]
   }
 }

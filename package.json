@@ -20,8 +20,7 @@
   "homepage": "github.com/codingvillage/callisto",
   "dependencies": {
     "sqlite3": "^3.1.1",
-    "ws": "^1.1.1",
-    "jquery": "^3.1.1"
+    "ws": "^1.1.1"
   },
   "include": {
     "js": [

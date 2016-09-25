@@ -1,14 +1,14 @@
 {
-  "name": "framework",
-  "version": "1.0.0",
-  "description": "Node JS MVC Framework ",
+  "name": "Chitta",
+  "version": "0.0.1",
+  "description": "Node JS MVC Framework",
   "main": "index.js",
   "scripts": {
     "test": "test/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/izbib/framework.git"
+    "url": "git@github.com:codingvillave/chitta.git"
   },
   "keywords": [
     "NodeJS",
@@ -16,8 +16,8 @@
     "Framework"
   ],
   "author": "Ihab Zbib",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/izbib/framework#readme",
+  "license": "MIT",
+  "homepage": "github.com/codingvillage/chitta",
   "dependencies": {
     "sqlite3": "^3.1.1",
     "ws": "^1.1.1",

@@ -1,6 +1,6 @@
 'use strict';
-var web = require('./lib/web');
-var db = require('./lib/db');
+global.web = require('./lib/web');
+global.db = require('./lib/db');
 
 var fs = require('fs');
 module.exports = (function () {
@@ -11,8 +11,8 @@ module.exports = (function () {
     function FW() {
         function init(config, cb) {
             try {
-                web.init(config.webport || 8080, config.wsport || 8080);
-                db.init();
+                global.web.init(config.web);
+                global.db.init(config.db);
                 if (typeof cb === 'function') {
                     cb();
                 }

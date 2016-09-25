@@ -1,7 +1,7 @@
 {
   "name": "Chitta",
   "version": "0.0.1",
-  "description": "Node JS MVC Framework",
+  "description": "Fast and lean Node JS MVC Framework for single page applications. Uses websockets",
   "main": "index.js",
   "scripts": {
     "test": "test/index.js"

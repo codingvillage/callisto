@@ -97,19 +97,6 @@
         }
     }
 
-
-    function dialog(title, message) {
-        $('<div><p>' + message + '</p></div>').dialog({
-            title: title,
-            closeOnEscape: true,
-            modal: true
-        });
-    }
-
-    function error(message) {
-        dialog('ERROR', message);
-    }
-
     observe('api', function (data) {
         if (api_cb.hasOwnProperty(data.guid)) {
             if (typeof api_cb[data.guid] === 'function') {
@@ -169,6 +156,5 @@
     window.guid = GUID;
     window.ws = ws;
     window.ready = ready;
-    window.error = error;
 
 }());

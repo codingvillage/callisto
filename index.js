@@ -1,6 +1,5 @@
 'use strict';
 global.web = require('./lib/web');
-global.db = require('./lib/db');
 
 var fs = require('fs');
 module.exports = (function () {
@@ -11,8 +10,7 @@ module.exports = (function () {
     function FW() {
         function init(config, cb) {
             try {
-                global.web.init(config.web);
-                global.db.init(config.db);
+                global.web.init(config || {});
                 if (typeof cb === 'function') {
                     cb();
                 }
@@ -21,8 +19,7 @@ module.exports = (function () {
             }
         }
         return {
-            web: web,
-            db: db,
+            web: global.web,
             init: init
         };
     }

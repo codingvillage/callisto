@@ -146,6 +146,7 @@
 
     observe('page', function (data) {
         var target = $('#' + data.target);
+
         target.html(data.html);
         walk(target);
     });

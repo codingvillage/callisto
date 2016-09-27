@@ -1,5 +1,5 @@
 'use strict';
-global.web = require('./lib/web');
+var web = require('./lib/web');
 
 var fs = require('fs');
 module.exports = (function () {
@@ -8,9 +8,9 @@ module.exports = (function () {
     });
 
     function FW() {
-        function init(config, cb) {
+        function server(config, cb) {
             try {
-                global.web.init(config || {});
+                web.init(config || {});
                 if (typeof cb === 'function') {
                     cb();
                 }
@@ -19,8 +19,9 @@ module.exports = (function () {
             }
         }
         return {
-            web: global.web,
-            init: init
+            web: web,
+            server: server,
+            addModule: web.addModule
         };
     }
     return new FW();

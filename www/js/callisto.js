@@ -56,6 +56,16 @@
         }));
     }
 
+    function html(file, callback) {
+        api({
+            module: 'web',
+            method: 'html',
+            params: {
+                file: file
+            }
+        }, callback);
+    }
+
     ws.onopen = function () {
         Ready = true;
     };
@@ -155,6 +165,7 @@
     window.observe = observe;
     window.unobserve = unobserve;
     window.api = api;
+    window.html = html;
     window.guid = GUID;
     window.ws = ws;
     window.ready = ready;

@@ -1,5 +1,5 @@
 'use strict';
-$(document).ready(function () {
+window.ready(function () {
 
     function getUsers() {
         window.api({

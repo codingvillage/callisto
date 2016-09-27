@@ -23,10 +23,12 @@
     function checkReady() {
         var i;
         if (Ready && ready_cb.length) {
-            for (i = 0; i < ready_cb.length; i++) {
-                ready_cb[i].call(null);
-            }
-            ready_cb = [];
+            $(document).ready(function () {
+                for (i = 0; i < ready_cb.length; i++) {
+                    ready_cb[i].call(null);
+                }
+                ready_cb = [];
+            });
         } else {
             setTimeout(checkReady, 100);
         }
@@ -114,52 +116,6 @@
             }
             delete api_cb[data.guid];
         }
-    });
-
-    function walk(element) {
-        element.find('[data-href]').each(function () {
-            var el = $(this);
-            if (el.data('target')) {
-                el.on('click', function (e) {
-                    console.log('users');
-                    window.api({
-                        module: 'web',
-                        method: 'html',
-                        params: {
-                            page: el.data('href'),
-                            target: el.data('target')
-                        }
-                    });
-                    e.preventDefault();
-                });
-            }
-        });
-
-        element.find('[data-content]').each(function () {
-            var el = $(this), id = el.attr('id');
-            if (!id) {
-                id = window.guid();
-                el.attr('id', id);
-            }
-            api({
-                module: 'web',
-                method: 'html',
-                params: {
-                    page: el.data('content'),
-                    target: id
-                }
-            });
-        });
-    }
-    ready(function () {
-        walk($(document));
-    });
-
-    observe('page', function (data) {
-        var target = $('#' + data.target);
-
-        target.html(data.html);
-        walk(target);
     });
 
     window.observe = observe;

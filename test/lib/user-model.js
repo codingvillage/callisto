@@ -1,12 +1,12 @@
 'use strict';
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('database.db3');
 module.exports = (function () {
 
     function USER_MODEL() {
-
-        var users = ['user1', 'user2', 'user3'];
         this.getAllUsers = function (callback) {
             if (typeof callback === 'function') {
-                callback(null, users);
+                db.all("SELECT * FROM users", callback);
             }
         };
     }

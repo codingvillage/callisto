@@ -1,14 +1,13 @@
 'use strict';
-var userModel = require('user-model.js');
+var userModel = require('./user-model.js');
 module.exports = (function () {
 
-    function USER() {
-
+    function USERS() {
         this.getUsers = function (params, callback) {
             userModel.getAllUsers(callback);
         };
     }
 
-    return new USER();
+    return new USERS();
 }());
 

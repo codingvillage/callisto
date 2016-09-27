@@ -111,6 +111,7 @@
             var el = $(this);
             if (el.data('target')) {
                 el.on('click', function (e) {
+                    console.log('users');
                     window.api({
                         module: 'web',
                         method: 'html',

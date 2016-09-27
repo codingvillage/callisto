@@ -3,12 +3,25 @@
     <head>
         <title>Callisto Test APP</title>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <style type="text/css">
+            body {
+                margin: 10px 20px;
+            }
+            h1 {
+                text-align: center;
+                font-size: 24px;
+            }
+        </style>
     </head>
     <body>
-        <h3><a href="#" data-href="user.html" data-target="content" data-observe="user">Load users page</a></h3>
-        <div class="content" id="content" data-content="home.html"></div>
+        <h3 class="menu">
+            <a href="#" id="home">Home</a>&nbsp;&nbsp;
+            <a href="#" id="users">Users</a>&nbsp;&nbsp;
+            <a href="#" id="rabbit">Rabbit</a>
+        </h3>
+        <div class="content" id="content"></div>
     </body>
 </html>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="callisto.js"></script>
-<script type="text/javascript" src="js/user.js"></script>
+<script type="text/javascript" src="js/main.js"></script>

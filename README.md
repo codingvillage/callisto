@@ -1,4 +1,11 @@
-# Fast and lean [Node.js] MVC framework for single page applications.
+# Easy and fast WebSockets and [Node.js] MVC framework for single page applications.
+Callisto is not one of these framework that gets in your way or tells you how to write your code. Think of it more as a helper than a traditional framework.
+The main two goals or Callisto are to be fast and simple. With virtually zero learning curve, it allows you to write application the MVC way, without imposing too many restrictions. It also allows you to:
+- Run an https/https web server
+- Run a [ws] websocket server on the same port
+- Define backend controllers without any configuration 
+- Call APIs asynchronously using websockets
+- Load HTML and other assets using both http and websockets
 
 ### Installation
 ```sh
@@ -22,6 +29,17 @@ To declare a controller, simply require the library and add it to modules. All t
 var users = require('./lib/users.js');
 callisto.addModule('users', users);
 ```
+
+### Index.js example
+```javascript
+var callisto = require('callisto');
+var users = require('./lib/users.js');
+var sqlite3 = require('sqlite3').verbose();
+global.db = new sqlite3.Database('database.db3');
+callisto.server();
+callisto.addModule('users', users);
+```
+
 ### Controller Example
 ```javascript
 'use strict';
@@ -67,7 +85,7 @@ module.exports = (function () {
  <script type="text/javascript" src="callisto.js"></script>
  ```
  
- ### index.html Example
+ ### Index.html Example
  ```html
  <!doctype html>
 <html>
@@ -95,132 +113,128 @@ module.exports = (function () {
  ```
 ### Client controller
 - A client side controller is any javascript included in index.html. 
-- Wrap the scope with `window.ready` function. The ready function guarantees that the document is ready and the websocket is connected. 
+- Wrap the scope with `window.ready` function. The ready function guarantees that the document is ready and that the websocket is connected. 
 > Currently, when the client is disconnected the page needs to be refreshed. In the future, this will be handled by the framework.
 
+### API Call
+APIs are calls are of course asynchronous, but also use websocjets instead of an XHTTP/AJAX request.
+```javascript
+window.api(params, callback);
+```
+```api
+params: {
+    module: 'module_name', // Module name is the key defined in the addModule function
+    method: 'method_name' // Method name is any public method of that module
+}
+callback: function(err, data)
+```
+```javascript
+window.api({
+    module: 'module_name',
+    method: 'method_name'
+}, function (err, data) {
+    //Callback
+});
+```
+### Load HTML
+Similar to the window.api, window.html servers HTML (or resource files) over websockets.
+```javascript
+window.html(path, callback);
+```
+```api
+path: File name relative to the root
+callback: function(err, data)
+```
+```javascript
+window.html("html/file.html", function (err, data) {
+    //Callback
+});
+```
+> Although slower, you can still use regular http request to serve html 
+```javascript
+ $.post("/html/file.html", function (data) {
+ // Callback
+}
+```
+### Client Controller Example
+```javascript
+'use strict';
+window.ready(function () {
 
-Dillinger uses a number of open source projects to work properly:
+    function getUsers() {
+        window.api({
+            module: 'users',
+            method: 'getUsers'
+        }, function (err, data) {
+            var i, ul = $('#users-list');
+            if (err) {
+                console.log(err);
+            }
+            for (i = 0; i < data.length; i++) {
+                ul.append($('<li>' + data[i].name + '</li>'));
+            }
+        });
+    }
 
-* [AngularJS] - HTML enhanced for web apps!
-* [Ace Editor] - awesome web-based text editor
-* [markdown-it] - Markdown parser done right. Fast and easy to extend.
-* [Twitter Bootstrap] - great UI boilerplate for modern web apps
-* [node.js] - evented I/O for the backend
-* [Express] - fast node.js network app framework [@tjholowaychuk]
-* [Gulp] - the streaming build system
-* [keymaster.js] - awesome keyboard handler lib by [@thomasfuchs]
-* [jQuery] - duh
+    window.html("html/home.html", function (err, data) {
+        $('#content').html(data);
+    });
 
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
+    $('#home').click(function (e) {
+        window.html("html/home.html", function (err, data) {
+            $('#content').html(data);
+        });
+        e.preventDefault();
+    });
 
-### Installation
+    $('#users').click(function (e) {
+        window.html("html/users.html", function (err, data) {
+            $('#content').html(data);
+            getUsers();
+        });
+        e.preventDefault();
+    });
 
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
-
-Download and extract the [latest pre-built release](https://github.com/joemccann/dillinger/releases).
-
-Install the dependencies and devDependencies and start the server.
-
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
+    $('#rabbit').click(function (e) {
+        window.html("html/rabbit.html", function (err, data) {
+            $('#content').html(data.toString());
+        });
+        e.preventDefault();
+    });
+});
 ```
 
-For production environments...
-
-```sh
-$ npm install --production
-$ npm run predeploy
-$ NODE_ENV=production node app
-```
-
-### Plugins
-
-Dillinger is currently extended with the following plugins
-
-* Dropbox
-* Github
-* Google Drive
-* OneDrive
-
-Readmes, how to use them in your own application can be found here:
-
-* [plugins/dropbox/README.md] [PlDb]
-* [plugins/github/README.md] [PlGh]
-* [plugins/googledrive/README.md] [PlGd]
-* [plugins/onedrive/README.md] [PlOd]
-
-### Development
-
-Want to contribute? Great!
-
-Dillinger uses Gulp + Webpack for fast developing.
-Make a change in your file and instantanously see your updates!
-
-Open your favorite Terminal and run these commands.
-
-First Tab:
-```sh
-$ node app
-```
-
-Second Tab:
-```sh
-$ gulp watch
-```
-
-(optional) Third:
-```sh
-$ karma start
-```
-#### Building for source
-For production release:
-```sh
-$ gulp build --prod
-```
-Generating pre-built zip archives for distribution:
-```sh
-$ gulp build dist --prod
-```
-### Docker
-Dillinger is very easy to install and deploy in a Docker container.
-
-By default, the Docker will expose port 80, so change this within the Dockerfile if necessary. When ready, simply use the Dockerfile to build the image.
-
-```sh
-cd dillinger
-npm run-script build-docker
-```
-This will create the dillinger image and pull in the necessary dependencies. Moreover, this uses a _hack_ to get a more optimized `npm` build by copying the dependencies over and only installing when the `package.json` itself has changed.  Look inside the `package.json` and the `Dockerfile` for more details on how this works.
-
-Once done, run the Docker image and map the port to whatever you wish on your host. In this example, we simply map port 8000 of the host to port 80 of the Docker (or whatever port was exposed in the Dockerfile):
-
-```sh
-docker run -d -p 8000:8080 --restart="always" <youruser>/dillinger:latest
-```
-
-Run the test application
-
+### Run The Test Application
 ```sh
 cd test
-npm install
+npm i
 node index.js
 ```
-```html
-http
-
-
-### Todos
-
- - Reconnect on socket close
- - Add navigation shortcuts
-
 License
 ----
 
 MIT
 
+**Have fun!**
 
-**Have fun!!**
+
+   [dill]: <https://github.com/joemccann/dillinger>
+   [git-repo-url]: <https://github.com/joemccann/dillinger.git>
+   [john gruber]: <http://daringfireball.net>
+   [@thomasfuchs]: <http://twitter.com/thomasfuchs>
+   [df1]: <http://daringfireball.net/projects/markdown/>
+   [markdown-it]: <https://github.com/markdown-it/markdown-it>
+   [Ace Editor]: <http://ace.ajax.org>
+   [node.js]: <http://nodejs.org>
+   [Twitter Bootstrap]: <http://twitter.github.com/bootstrap/>
+   [keymaster.js]: <https://github.com/madrobby/keymaster>
+   [jQuery]: <http://jquery.com>
+   [@tjholowaychuk]: <http://twitter.com/tjholowaychuk>
+   [express]: <http://expressjs.com>
+   [AngularJS]: <http://angularjs.org>
+   [Gulp]: <http://gulpjs.com>
+   [ws]: <https://github.com/websockets/ws> 
+   [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
+   [PlGh]:  <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
+   [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
+   [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>

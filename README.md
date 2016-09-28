@@ -205,11 +205,14 @@ window.ready(function () {
 ```
 
 ### Run The Test Application
+
 ```sh
 cd test
 npm i
 node index.js
 ```
+And load it in the browser http://localhost:8080
+
 License
 ----
 

@@ -1,6 +1,6 @@
 # Easy and fast WebSockets and [Node.js] MVC framework for single page applications.
 Callisto is not one of these framework that gets in your way or tells you how to write your code. Think of it more as a helper than a traditional framework.
-The main two goals or Callisto are to be fast and simple. With virtually zero learning curve, it allows you to write application the MVC way, without imposing too many restrictions. It also allows you to:
+The two main goals or Callisto are to be fast and simple. With virtually zero learning curve, it allows you to write application the MVC way, without imposing too many restrictions. It also allows you to:
 - Run an https/https web server
 - Run a [ws] websocket server on the same port
 - Define backend controllers without any configuration 
@@ -9,7 +9,7 @@ The main two goals or Callisto are to be fast and simple. With virtually zero le
 
 ### Installation
 ```sh
-$ npm install -save callisto
+$ npm install --save callisto
 ```
 ### Usage
 ```javascript
@@ -208,7 +208,7 @@ window.ready(function () {
 
 ```sh
 cd test
-npm i
+npm install
 node index.js
 ```
 And load it in the browser http://localhost:8080

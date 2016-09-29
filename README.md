@@ -1,7 +1,8 @@
+Show more
+Sep 28
 # Easy and fast WebSockets and [Node.js] MVC framework for single page applications.
-Callisto is not one of these framework that gets in your way or tells you how to write your code. Think of it more as a helper than a traditional framework.
-The two main goals or Callisto are to be fast and simple. With virtually zero learning curve, it allows you to write application the MVC way, without imposing too many restrictions. It also allows you to:
-- Run an https/https web server
+The two main goals for Callisto are to be fast and simple. With virtually zero learning curve, it allows you to write MVC applications, without imposing too many restrictions. It also allows you to:
+- Run an http/https web server
 - Run a [ws] websocket server on the same port
 - Define backend controllers without any configuration 
 - Call APIs asynchronously using websockets
@@ -56,8 +57,8 @@ module.exports = (function () {
 }());
 ```
 ### Model
-Callisto doesn't impose any restrictions on how the model is defined. Tipically in an MVC setup, a model represents a single data object entity, and provides a database interface to the controller.
-A controller can simply be require a model library and call the public methods.
+Callisto doesn't impose any restrictions on how the model is defined. Typically in an MVC setup, a model represents a single data object entity, and provides a database interface to the controller.
+A controller can simply require a model library and call the public methods.
 
 ### Model Example
 ```javascript
@@ -117,7 +118,7 @@ module.exports = (function () {
 > Currently, when the client is disconnected the page needs to be refreshed. In the future, this will be handled by the framework.
 
 ### API Call
-APIs are calls are of course asynchronous, but also use websocjets instead of an XHTTP/AJAX request.
+APIs calls are of course asynchronous, but also use websocjets instead of an XHTTP/AJAX request.
 ```javascript
 window.api(params, callback);
 ```

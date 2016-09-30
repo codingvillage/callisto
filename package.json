@@ -1,6 +1,6 @@
 {
   "name": "callisto",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Fast and lean Node.js MVC Framework for single page applications.",
   "main": "index.js",
   "scripts": {

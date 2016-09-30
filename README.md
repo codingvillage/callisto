@@ -1,5 +1,3 @@
-Show more
-Sep 28
 # Easy and fast WebSockets and [Node.js] MVC framework for single page applications.
 The two main goals for Callisto are to be fast and simple. With virtually zero learning curve, it allows you to write MVC applications, without imposing too many restrictions. It also allows you to:
 - Run an http/https web server
@@ -218,6 +216,9 @@ License
 ----
 
 MIT
+
+
+
 
 **Have fun!**
 

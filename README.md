@@ -1,36 +1,40 @@
-# Easy and fast WebSockets and [Node.js] MVC framework for single page applications.
+# Easy and fast, WebSocket based, [node.js] MVC framework for single page applications.
+
+```js
+var callisto = require('callisto');
+callisto.server();
+```
+
+## Installation
+```bash
+$ npm install callisto
+```
+
 The two main goals for Callisto are to be fast and simple. With virtually zero learning curve, it allows you to write MVC applications, without imposing too many restrictions. It also allows you to:
+
+## Features
 - Run an http/https web server
 - Run a [ws] websocket server on the same port
 - Define backend controllers without any configuration 
 - Call APIs asynchronously using websockets
 - Load HTML and other assets using both http and websockets
 
-### Installation
-```sh
-$ npm install --save callisto
-```
-### Usage
-```javascript
-var callisto = require('callisto');
-callisto.server();
-```
-### Configuration
-```javascript
+## Usage
+```js
 callisto.server({
     port: 8080, // Used for both http and websockets
     root: 'www' // Public web directory
 });
 ```
-### Controller
+## Controller
 To declare a controller, simply require the library and add it to modules. All the controller's public methods are accessible from the client.
 ```javascript
 var users = require('./lib/users.js');
 callisto.addModule('users', users);
 ```
 
-### Index.js example
-```javascript
+## Index.js example
+```js
 var callisto = require('callisto');
 var users = require('./lib/users.js');
 var sqlite3 = require('sqlite3').verbose();
@@ -39,8 +43,8 @@ callisto.server();
 callisto.addModule('users', users);
 ```
 
-### Controller Example
-```javascript
+## Controller Example
+```js
 'use strict';
 var userModel = require('./user-model.js');
 module.exports = (function () {
@@ -54,12 +58,12 @@ module.exports = (function () {
     return new USERS();
 }());
 ```
-### Model
+## Model
 Callisto doesn't impose any restrictions on how the model is defined. Typically in an MVC setup, a model represents a single data object entity, and provides a database interface to the controller.
 A controller can simply require a model library and call the public methods.
 
-### Model Example
-```javascript
+## Model Example
+```js
 'use strict';
 module.exports = (function () {
     function USER_MODEL() {
@@ -74,7 +78,7 @@ module.exports = (function () {
 }());
 ```
 
-### Client Side
+## Client Side
   - Put all the client files in the `root` directory, delacred in the server configurations. The default root is `www`.
   - Create an index.html in the root directory
   - Callisto requires [jQuery]
@@ -84,7 +88,7 @@ module.exports = (function () {
  <script type="text/javascript" src="callisto.js"></script>
  ```
  
- ### Index.html Example
+ ## Index.html Example
  ```html
  <!doctype html>
 <html>
@@ -110,14 +114,14 @@ module.exports = (function () {
 <script type="text/javascript" src="callisto.js"></script>
 <script type="text/javascript" src="js/main-ws.js"></script>
  ```
-### Client controller
+## Client controller
 - A client side controller is any javascript included in index.html. 
 - Wrap the scope with `window.ready` function. The ready function guarantees that the document is ready and that the websocket is connected. 
 > Currently, when the client is disconnected the page needs to be refreshed. In the future, this will be handled by the framework.
 
-### API Call
+## API Call
 APIs calls are of course asynchronous, but also use websocjets instead of an XHTTP/AJAX request.
-```javascript
+```js
 window.api(params, callback);
 ```
 ```api
@@ -135,7 +139,7 @@ window.api({
     //Callback
 });
 ```
-### Load HTML
+## Load HTML
 Similar to the window.api, window.html servers HTML (or resource files) over websockets.
 ```javascript
 window.html(path, callback);
@@ -144,19 +148,19 @@ window.html(path, callback);
 path: File name relative to the root
 callback: function(err, data)
 ```
-```javascript
+```js
 window.html("html/file.html", function (err, data) {
     //Callback
 });
 ```
 > Although slower, you can still use regular http request to serve html 
-```javascript
+```js
  $.post("/html/file.html", function (data) {
  // Callback
 }
 ```
-### Client Controller Example
-```javascript
+## Client Controller Example
+```js
 'use strict';
 window.ready(function () {
 
@@ -196,26 +200,26 @@ window.ready(function () {
 
     $('#rabbit').click(function (e) {
         window.html("html/rabbit.html", function (err, data) {
-            $('#content').html(data.toString());
+            $('#content').html(data);
         });
         e.preventDefault();
     });
 });
 ```
 
-### Run The Test Application
+## Run The Test Application
 
-```sh
+```bash
 cd test
 npm install
 node index.js
 ```
-And load it in the browser http://localhost:8080
+## http://localhost:8080
 
-License
+## License
 ----
 
-MIT
+[MIT](LICENSE)
 
 
 

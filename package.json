@@ -1,7 +1,7 @@
 {
   "name": "callisto",
   "version": "0.1.5",
-  "description": "Fast and lean Node.js MVC Framework for single page applications.",
+  "description": "Fast and lean Node.js WebSockets MVC Framework for single page applications.",
   "main": "index.js",
   "scripts": {
     "test": "test/index.js"
@@ -11,10 +11,9 @@
     "url": "git@github.com:codingvillage/callisto.git"
   },
   "keywords": [
-    "mvc",
-    "framework",
     "websockets",
-    "nodejs"
+    "mvc",
+    "framework"
   ],
   "author": "Ihab Zbib",
   "license": "MIT",

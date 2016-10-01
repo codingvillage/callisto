@@ -37,7 +37,7 @@ window.ready(function () {
 
     $('#rabbit').click(function (e) {
         window.html("html/rabbit.html", function (err, data) {
-            $('#content').html(data.toString());
+            $('#content').html(data);
         });
         e.preventDefault();
     });

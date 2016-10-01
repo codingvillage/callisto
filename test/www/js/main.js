@@ -16,19 +16,19 @@ window.ready(function () {
         });
     }
 
-    $.post("/html/home.html", function (data) {
+    $.post("html/home.html", function (data) {
         $('#content').html(data);
     });
 
     $('#home').click(function (e) {
-        $.post("/html/home.html", function (data) {
+        $.post("html/home.html", function (data) {
             $('#content').html(data);
         });
         e.preventDefault();
     });
 
     $('#users').click(function (e) {
-        $.post("/html/users.html", function (data) {
+        $.post("html/users.html", function (data) {
             $('#content').html(data);
             getUsers();
         });
@@ -36,7 +36,7 @@ window.ready(function () {
     });
 
     $('#rabbit').click(function (e) {
-        $.post("/html/rabbit.html", function (data) {
+        $.post("html/rabbit.html", function (data) {
             $('#content').html(data);
         });
         e.preventDefault();

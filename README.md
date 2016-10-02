@@ -207,14 +207,15 @@ window.ready(function () {
 });
 ```
 
-## Run The Test Application
+## Run The Test
 
 ```bash
 cd test
 npm install
 node index.js
 ```
-## http://localhost:8080
+And load it http://localhost:8080
+
 
 ## License
 ----

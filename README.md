@@ -13,7 +13,7 @@ $ npm install callisto
 The two main goals for Callisto are to be fast and simple. With virtually zero learning curve, it allows you to write MVC applications, without imposing too many restrictions. It also allows you to:
 
 ## Features
-- Run an http/https web server
+- Run an http web server
 - Run a [ws] websocket server on the same port
 - Define backend controllers without any configuration 
 - Call APIs asynchronously using websockets
@@ -222,6 +222,10 @@ node index.js
 ```
 And load it http://localhost:8080
 
+## TODO
+- Reconnect on socket close
+- Test with Internet Explorer
+- Support https and wss
 
 ## License
 ----

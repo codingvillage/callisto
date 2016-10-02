@@ -24,7 +24,7 @@ The two main goals for Callisto are to be fast and simple. With virtually zero l
 callisto.server({
     port: 8080, // Used for both http and websockets
     root: 'www' // Public web directory
-});
+}, callback);
 ```
 ## Controller
 To declare a controller, simply require the library and add it to modules. All the controller's public methods are accessible from the client.
@@ -35,12 +35,18 @@ callisto.addModule('users', users);
 
 ## Index.js example
 ```js
+'use strict';
 var callisto = require('callisto');
 var users = require('./lib/users.js');
 var sqlite3 = require('sqlite3').verbose();
 global.db = new sqlite3.Database('database.db3');
-callisto.server();
-callisto.addModule('users', users);
+
+
+callisto.server(null, function (err) {
+    if (!err) {
+      callisto.addModule('users', users);
+    }
+});
 ```
 
 ## Controller Example

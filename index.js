@@ -16,6 +16,7 @@ module.exports = (function () {
                 }
             } catch (e) {
                 console.error(e.stack || e);
+                cb(e);
             }
         }
         return {

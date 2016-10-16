@@ -228,10 +228,10 @@ And load it http://localhost:8080
 - Support https and wss
 
 ## License
-----
 
 [MIT](LICENSE)
 
+----
 
 
 
